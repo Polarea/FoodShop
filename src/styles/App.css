@@ -1,0 +1,76 @@
+*{
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+#navbar{
+height: 8rem;
+background-color: white;
+}
+
+Container, Column, Row{
+    width: 100%;
+}
+.titlerow{
+    justify-content: center;
+}
+
+#title{
+border-radius: 15%;
+color: whitesmoke;
+background-color: black;
+text-align: center;
+width: 100%;
+font-size: 4rem;
+letter-spacing: 2rem;
+}
+
+#navrow{
+width: 100%;
+display: flex;
+translate: 0 -0.5rem;
+}
+
+#link{
+border-radius: 5%;
+height: 2.5rem;
+width: 8rem;
+font-size: 1.2rem;
+font-weight: 500;
+letter-spacing: 0.1rem;
+text-align: center;
+}
+
+#link:hover{
+    background-color: black;
+    color: whitesmoke;
+}
+
+#cartButton{
+float: right;
+width: 2.5rem;
+height: 2.5rem;
+position: relative;
+translate: -0.5rem -0.5rem;
+}
+
+#cartImage{
+translate: -0.4rem -0.1rem;
+height: 2rem;
+width: 2rem;
+}
+
+#quantityIcon{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: white;
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    translate: 0.9rem 0.9rem;
+    border-radius: 50%;
+    background-color: red;
+    display: flex; 
+    justify-content:center;
+    align-items:center;
+}
+
