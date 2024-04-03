@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { useState } from "react";
+import { Card, Button, Row, Col, Carousel} from "react-bootstrap";
 import { useCart } from "../contexts/CartContext";
 
 export default function Cocktail() {
@@ -12,47 +11,35 @@ export default function Cocktail() {
     getQuantity,
   } = useCart();
 
-  const [drink, setDrink] = useState(drinks.drinks[0]);
-  const index = useRef(0);
-
+  const [drink] = useState(drinks.drinks[0]);
+ 
   const quantity = getQuantity(drink?.idDrink);
-  const handleForwardClick = () => setDrink(drinks?.drinks[++index.current]);
-  const handleBackwardClick = () =>
-    index.current > 0 && setDrink(drinks?.drinks[--index.current]);
 
   return (
     <Card key={drink?.idDrink} className="text-align-center mt-3">
       <Card.Body>
         <Row className="d-flex flew-row" xs={1} md={2} lg={2}>
           <Col className="flex-column">
-            <div
-              className="d-flex align-items-center justify-content-center"
-              style={{ gap: "1rem" }}
-            >
-              <Button
-                onClick={handleBackwardClick}
-                variant="btn btn-light"
-                className="mt-4 rounded-0 rounded-start"
-                style={{translate:'1.3rem -0.75rem', height:'25.1rem'}}
-              >
-                <BsArrowLeft size={25} />
-              </Button>
-              <Card.Img
-                src={drink?.strDrinkThumb}
-                height="400rem"
-                style={{ objectFit: "cover", boxShadow:'0px 0px 20px 1px'}}
-              />
-              <Button
-                onClick={handleForwardClick}
-                variant="btn btn-light"
-                className="mt-4 rounded-0 rounded-end"
-                style={{translate:'-1.3rem -0.75rem', height:'25.1rem'}}
-              >
-                <BsArrowRight size={25} />
-              </Button>
-            </div>
+          <Carousel fade>
+            {drinks.drinks.map(drink => {
+              return (
+                <Carousel.Item>
+        <img src={drink.strDrinkThumb} key={drink.idDrink} className="rounded"/>
+        <Carousel.Caption>
+          <h3 className="text-shadow-lg">{drink.strDrink}</h3>
+        </Carousel.Caption>
+      </Carousel.Item>
+              );
+            })}
+      
+    </Carousel>
           </Col>
           <Col className="flex-column">
+           <div className="btn-group d-flex justify-content-between" role="group">
+            <Button type="button" className="btn btn-light btn-outline-dark">Non</Button>
+            <Button type="button" className="btn btn-light btn-outline-dark">Non</Button>
+            <Button type="button" className="btn btn-light btn-outline-dark">Non</Button>
+            </div>
             <Card.Title
               style={{
                 letterSpacing: "0.5rem",
@@ -116,3 +103,32 @@ export default function Cocktail() {
     </Card>
   );
 }
+
+
+
+{/* <div
+className="d-flex align-items-center justify-content-center"
+style={{ gap: "1rem" }}
+>
+<Button
+  onClick={handleBackwardClick}
+  variant="btn btn-light"
+  className="mt-4 rounded-0 rounded-start"
+  style={{translate:'1.3rem -0.75rem', height:'25.1rem'}}
+>
+  <BsArrowLeft size={25} />
+</Button>
+<Card.Img
+  src={drink?.strDrinkThumb}
+  height="400rem"
+  style={{ objectFit: "cover", boxShadow:'0px 0px 20px 1px'}}
+/>
+<Button
+  onClick={handleForwardClick}
+  variant="btn btn-light"
+  className="mt-4 rounded-0 rounded-end"
+  style={{translate:'-1.3rem -0.75rem', height:'25.1rem'}}
+>
+  <BsArrowRight size={25} />
+</Button>
+</div> */}
