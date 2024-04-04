@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, Button, Row, Col, Carousel} from "react-bootstrap";
 import { useCart } from "../contexts/CartContext";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 export default function Cocktail() {
   const {
@@ -10,25 +11,35 @@ export default function Cocktail() {
     decreaseQuantity,
     getQuantity,
   } = useCart();
-
-  const [drink] = useState(drinks.drinks[0]);
- 
+  
+  const [index, setIndex] = useState(0);
+  const [drink, setDrink] = useState(drinks.drinks[index]);
   const quantity = getQuantity(drink?.idDrink);
+  const handelSelect = (selectedIndex : number) => {setDrink(drinks.drinks[selectedIndex]); setIndex(selectedIndex); }
 
   return (
     <Card key={drink?.idDrink} className="text-align-center mt-3">
       <Card.Body>
         <Row className="d-flex flew-row" xs={1} md={2} lg={2}>
           <Col className="flex-column">
-          <Carousel fade>
+          <Carousel pause="hover" activeIndex={index} onSelect={handelSelect} nextIcon={<Button
+            variant="btn btn-light"
+            className="mt-4 rounded-0 rounded-end"
+            style={{translate:'1.5rem -0.75rem', height:'43.7rem'}}
+            >
+            <BsArrowRight size={25} />
+            </Button>} prevIcon={<Button
+            variant="btn btn-light"
+            className="mt-4 rounded-0 rounded-start"
+            style={{translate:'-1.5rem -0.75rem', height:'43.7rem'}}
+            >
+            <BsArrowLeft size={25} />
+            </Button>}>
             {drinks.drinks.map(drink => {
               return (
                 <Carousel.Item>
-        <img src={drink.strDrinkThumb} key={drink.idDrink} className="rounded"/>
-        <Carousel.Caption>
-          <h3 className="text-shadow-lg">{drink.strDrink}</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
+            <img src={drink.strDrinkThumb} key={drink.idDrink} className="rounded"/>
+            </Carousel.Item>
               );
             })}
       
@@ -36,11 +47,11 @@ export default function Cocktail() {
           </Col>
           <Col className="flex-column">
            <div className="btn-group d-flex justify-content-between" role="group">
-            <Button type="button" className="btn btn-light btn-outline-dark">Non</Button>
-            <Button type="button" className="btn btn-light btn-outline-dark">Non</Button>
-            <Button type="button" className="btn btn-light btn-outline-dark">Non</Button>
+            <Button type="button" className="btn btn-light btn-outline-dark fw-bold">Alkohol</Button>
+            <Button type="button" className="btn btn-light btn-outline-dark fw-bold">Alkoholfri</Button>
+            <Button type="button" className="btn btn-light btn-outline-dark fw-bold">Kaffe / Te</Button>
             </div>
-            <Card.Title
+            <Card.Title className="mt-3"
               style={{
                 letterSpacing: "0.5rem",
                 textShadow: "1px 1px 10px",
@@ -92,7 +103,7 @@ export default function Cocktail() {
                     variant="danger"
                     onClick={() => removeItem(drink?.idDrink)}
                   >
-                    Remove
+                    Ta Bort
                   </Button>
                 </div>
               )}
