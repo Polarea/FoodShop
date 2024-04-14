@@ -1,6 +1,7 @@
 import { Button, Card, Col, Modal, Row} from "react-bootstrap"
 import { ShoppingCart, useCart } from "../contexts/CartContext"
 import { Link } from "react-router-dom";
+import { formatCurrency } from "../utilities/CurrencyFormatter";
 
 
 function CocktailModal() {
@@ -21,12 +22,12 @@ function CocktailModal() {
                 letterSpacing: "0.5rem",
                 textShadow: "1px 1px 10px",
               }}>{drink?.strDrink}</div>
-    <Card key={drink?.idDrink} className="text-align-center mt-3">
+    <Card key={drink?.idDrink} className="mt-3">
       <Card.Body>
         <Col className="w-100 h-100">
           <Row className="w-100 h-75">
             <div
-              className="d-flex align-items-center justify-content-center"
+              className="ms-2"
               style={{ gap: "1rem"}}
             >
                  <Card.Img
@@ -36,8 +37,7 @@ function CocktailModal() {
               </div>
               </Row>
           <Row className="w-100 h-25">
-            <div className="mb-3 fs-5">{drink?.price}</div>
-            <div className="mb-3 fs-5">{drink?.quantity}</div>
+            <div className="m-3 fs-5 fw-bold">{formatCurrency(59)}</div>
             <div className="mt-auto mb-3">
               
               {quantity === 0 ? (

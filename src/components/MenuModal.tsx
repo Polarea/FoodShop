@@ -1,6 +1,6 @@
 import { Modal, Card, Button } from "react-bootstrap";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import { useCart } from "../contexts/CartContext";
+import { ShoppingCart, useCart } from "../contexts/CartContext";
 import { useState } from "react";
 
 export default function MenuModal() {
@@ -18,6 +18,13 @@ export default function MenuModal() {
   // const itemIndex = useRef(index);
   const [item, setItem] = useState(menu[index + 1]);
   const quantity = getQuantity(item._id);
+  const cartItem : ShoppingCart = {
+    id :  item._id,
+    name : item.title,
+    imageUrl : item.imageUrl,
+    price : 59,
+    quantity : quantity
+    }
 
   const handleForwardClick = () => {
     if (index < menu.length - 1) {
@@ -50,7 +57,7 @@ export default function MenuModal() {
                 <Button
                   variant="btn btn-dark"
                   className="w-100"
-                  onClick={() => increaseQuantity(item._id)}
+                  onClick={() => increaseQuantity(cartItem)}
                 >
                   + Lägg i varukorgen
                 </Button>
@@ -76,7 +83,7 @@ export default function MenuModal() {
                     <Button
                       style={{ width: "2.5rem" }}
                       variant="btn btn-dark"
-                      onClick={() => increaseQuantity(item._id)}
+                      onClick={() => increaseQuantity(cartItem)}
                     >
                       <span className="fw-bold">+</span>
                     </Button>

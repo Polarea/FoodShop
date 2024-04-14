@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Card, Button, Row, Col, Carousel} from "react-bootstrap";
 import { Cocktails, ShoppingCart, useCart } from "../contexts/CartContext";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { formatCurrency } from "../utilities/CurrencyFormatter";
+
+const baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php";
 
 export default function Cocktail() {
   const {
@@ -14,9 +17,9 @@ export default function Cocktail() {
   
   const [index, setIndex] = useState(10);
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
-  const baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php";
   const handelSelect = (selectedIndex : number) => {setIndex(selectedIndex); }
   const quantity = getQuantity(selectedDrinks.drinks[index].idDrink);
+
   const cartItem : ShoppingCart = {
     id :  selectedDrinks.drinks[index].idDrink,
     name : selectedDrinks.drinks[index].strDrink,
@@ -35,7 +38,7 @@ export default function Cocktail() {
   return (
     <Card key={selectedDrinks.drinks[index].idDrink} className="text-align-center mt-3">
       <Card.Body>
-        <Row className="d-flex flew-row" xs={1} md={2} lg={2}>
+        <Row className="d-flex flew-row" xs={1} md={1} lg={2}>
           <Col className="flex-column">
           <Carousel pause="hover" activeIndex={index} onSelect={handelSelect} nextIcon={<Button
             variant="btn btn-light"
@@ -53,31 +56,28 @@ export default function Cocktail() {
             {selectedDrinks.drinks.map(drink => {
               return (
                 <Carousel.Item>
-            <img src={drink.strDrinkThumb} key={drink.idDrink} className="rounded"/>
-            <p>{drink.strDrink}</p>
+            <img src={drink.strDrinkThumb} key={drink.idDrink} className="object-fit-cover border rounded"/>
             </Carousel.Item>
               );
             })}
       
     </Carousel>
           </Col>
-          <Col className="flex-column">
-           <div className="btn-group d-flex justify-content-between" role="group">
-            <Button type="button" className="btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?a=Alcoholic")}>Alkohol</Button>
-            <Button type="button" className="btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?a=Non_Alcoholic")}>Alkoholfri</Button>
-            <Button type="button" className="btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?c=Coffee_/_Tea")}>Kaffe / Te</Button>
-            </div>
-            <Card.Title className="mt-3"
+          <Col className="d-flex flex-column w-70">
+           
+
+            <Card.Title className="mt-1 mb-4 text-center fs-2"
               style={{
                 letterSpacing: "0.5rem",
                 textShadow: "1px 1px 10px",
+                height: "5rem"
               }}
             >
               {selectedDrinks.drinks[index].strDrink}
             </Card.Title>
-            <div className="mb-3 fs-5">{selectedDrinks.drinks[index].price}</div>
-            <div className="mb-3 fs-5">{selectedDrinks.drinks[index].quantity}</div>
-            <div className="mt-auto">
+            <div className="mb-2 fs-5 fw-bold text-center text-muted">{formatCurrency(59)}</div>
+
+            <div className="d-flex justify-content-center">
               {quantity === 0 ? (
                 <Button
                   variant="btn btn-dark"
@@ -124,6 +124,23 @@ export default function Cocktail() {
                 </div>
               )}
             </div>
+
+            <div className="ms-1 btn-group d-flex justify-content-between mt-auto w-100" role="group">
+            <Button type="button" className="rounded-0 border btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?a=Alcoholic")}>Alkohol</Button>
+            <Button type="button" className="border btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?a=Non_Alcoholic")}>Alkoholfri</Button>
+            <Button type="button" className="rounded-0 border btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?c=Coffee_/_Tea")}>Kaffe / Te</Button>
+            </div>
+
+            <Row className="d-flex justify-content-center border-top-0 border ms-1 h-60 flew-row w-100 rounded-bottom" xs={2} md={2} lg={4}>
+                      {selectedDrinks.drinks.slice(index, index + 8).map(drink => {
+                        return (
+                          <Col className="flex-column">
+                  <img src={drink.strDrinkThumb} style={{width:"8rem", margin:"0.5rem", borderRadius:"0.2rem"}}/>
+                  <p className="text-center fw-bold text-muted h-5">{drink.strDrink}</p>
+                  </Col>
+                        )})}            
+
+              </Row>
           </Col>
         </Row>
       </Card.Body>
