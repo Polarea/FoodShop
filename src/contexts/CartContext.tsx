@@ -16,13 +16,20 @@ const MENU_URL = "https://iths-2024-recept-grupp7-86oop6.reky.se/recipes";
 
 const COCKTAIL_URL =
   "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail";
+
+export interface Ingredients{
+  _id : string;
+  name : string;
+  amount : number;
+  unit : string;
+}
   
 export interface Menu {
   _id: string;
   imageUrl: string;
   title: string;
   description: string;
-  categories: string[];
+  ingredients: Ingredients[];
   price: number;
   quantity: number;
 }
@@ -37,6 +44,7 @@ export interface Cocktails {
   drinks: Cocktail[];
 }
 type CartContext = {
+  ingredients : Ingredients[];
   clearCart : ()=> void;
   index: number;
   drinks: Cocktails;
@@ -50,7 +58,7 @@ type CartContext = {
   totalQuantity: number;
   cart: ShoppingCart[];
   getQuantity: (id: string) => number;
-  increaseQuantity: (id: string) => void;
+  increaseQuantity: (cartItem : ShoppingCart) => void;
   decreaseQuantity: (id: string) => void;
   removeItem: (id: string) => void;
 };
@@ -61,6 +69,9 @@ type ProviderValue = {
 
 export type ShoppingCart = {
   id: string;
+  name : string;
+  imageUrl : string;
+  price : number;
   quantity: number;
 };
 
@@ -80,6 +91,7 @@ export function CartProvider({ children }: ProviderValue) {
   useEffect(() => {
     fetchMenu();
   }, []);
+  const ingredients = menu[0]?.ingredients as Ingredients[]; 
   const cocktails: Cocktails = {
     drinks: [],
   };
@@ -141,13 +153,13 @@ export function CartProvider({ children }: ProviderValue) {
     return cart.find((item) => item.id === id)?.quantity || 0;
   }
 
-  function increaseQuantity(id: string) {
+  function increaseQuantity(cartItem : ShoppingCart) {
     setCart((currCart) => {
-      if (currCart.find((item) => item.id === id) == null) {
-        return [...currCart, { id, quantity: 1 }];
+      if (currCart.find((item) => item.id === cartItem.id) == null) {
+        return [...currCart, {...cartItem, quantity: 1 }];
       } else {
         return currCart.map((item) => {
-          if (item.id === id) {
+          if (item.id === cartItem.id) {
             return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
@@ -182,6 +194,7 @@ export function CartProvider({ children }: ProviderValue) {
   return (
     <CartContext.Provider
       value={{
+        ingredients,
         clearCart,
         index,
         menu,

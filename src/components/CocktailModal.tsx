@@ -1,12 +1,19 @@
 import { Button, Card, Col, Modal, Row} from "react-bootstrap"
-import { useCart } from "../contexts/CartContext"
+import { ShoppingCart, useCart } from "../contexts/CartContext"
 import { Link } from "react-router-dom";
 
 
 function CocktailModal() {
     const {drinks, open, isCocktailOpen, getQuantity, increaseQuantity, decreaseQuantity, removeItem} = useCart(); 
-    const drink = drinks.drinks[0]; 
+    const drink = drinks.drinks[10]; 
     const quantity = getQuantity(drink?.idDrink);
+    const cartItem : ShoppingCart = {
+      id :  drink?.idDrink,
+      name : drink?.strDrink,
+      imageUrl : drink?.strDrinkThumb,
+      price : 59,
+      quantity : quantity
+      }
   return (
     
     <Modal show={isCocktailOpen} onHide={()=>open(false, "cocktail", '')}>
@@ -32,53 +39,59 @@ function CocktailModal() {
             <div className="mb-3 fs-5">{drink?.price}</div>
             <div className="mb-3 fs-5">{drink?.quantity}</div>
             <div className="mt-auto mb-3">
+              
               {quantity === 0 ? (
-                <Button
-                  variant="btn btn-dark"
-                  className="w-10"
-                  onClick={() => increaseQuantity(drink?.idDrink)}
-                >
-                  + Lägg i varukorgen
-                </Button>
-              ) : (
-                <div
-                  className="d-flex justify-content-between flex-row"
-                  style={{ gap: "0.5rem" }}
-                >
-                  <div
-                    style={{ width: "18rem", height: "2.5rem" }}
-                    className="d-flex justify-content-between bg-dark text-white rounded"
+                <div className="d-flex justify-content-between">
+                  <Button
+                    variant="btn btn-dark"
+                    className="w-10"
+                    onClick={() => increaseQuantity(cartItem)}
                   >
-                    <Button
-                      style={{ width: "2.5rem" }}
-                      variant="btn btn-dark"
-                      onClick={() => decreaseQuantity(drink?.idDrink)}
+                    + Lägg i varukorgen
+                  </Button> <Link className="btn btn-dark" to='/cocktails' onClick={()=>{open(false, "cocktail", "")}}>Till Cocktails</Link>
+                </div>
+              ) : (
+                <div className="w-100">
+                  <div
+                    className="d-flex justify-content-between flex-row"
+                    style={{ gap: "0.5rem" }}
+                  >
+                    <div
+                      style={{ width: "18rem", height: "2.5rem" }}
+                      className="d-flex text-white rounded"
                     >
-                      <span className="fw-bold">-</span>
-                    </Button>
-                    <div>
-                      <span className="fs-4">{quantity}</span> st. i varukorgen
+                      <Button
+                        style={{ width: "2.5rem"}}
+                        variant="btn btn-outline-dark" className="rounded-0 rounded-start"
+                        onClick={() => decreaseQuantity(drink?.idDrink)}
+                      >
+                        <span className="fw-bold">-</span>
+                      </Button>
+                      <div className="bg-dark ps-3 pe-3">
+                        <span className="fs-4">{quantity}</span> st. i varukorgen
+                      </div>
+                      <Button
+                        style={{ width: "2.5rem" }}
+                        variant="btn btn-outline-dark" className="rounded-0 rounded-end"
+                        onClick={() => increaseQuantity(cartItem)}
+                      >
+                        <span className="fw-bold">+</span>
+                      </Button> 
                     </div>
                     <Button
-                      style={{ width: "2.5rem" }}
-                      variant="btn btn-dark"
-                      onClick={() => increaseQuantity(drink?.idDrink)}
+                      style={{ width: "6rem", height: "2.5rem" }}
+                      variant="outline-danger"
+                      onClick={() => removeItem(drink?.idDrink)}
                     >
-                      <span className="fw-bold">+</span>
+                      Ta Bort
                     </Button>
                   </div>
-
-                  <Button
-                    style={{ width: "6rem", height: "2.5rem" }}
-                    variant="danger"
-                    onClick={() => removeItem(drink?.idDrink)}
-                  >
-                    Remove
-                  </Button>
+                  <div className="mt-3 d-flex justify-content-center"><Link className="btn btn-dark fw-bold" style={{width:'26rem'}} to='/cocktails' onClick={()=>{open(false, "cocktail", "")}}>Till Cocktails</Link></div>
                 </div>
+                
               )}
             </div>
-            <Link className="btn btn-dark" to='/cocktails' onClick={()=>{open(false, "cocktail", "")}}>Till Cocktails</Link>
+            
           </Row>
         </Col>
       </Card.Body>

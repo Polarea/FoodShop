@@ -7,9 +7,11 @@ type cartItem = {
   quantity: number;
 };
 export function CartItem({ id, quantity }: cartItem) {
-  const { drinks, menu, removeItem } = useCart();
-  const item = menu.find((item) => item._id === id);
-  const drink = drinks.drinks.find(drink => drink.idDrink === id);
+  const { cart, removeItem } = useCart();
+  // const item = menu.find((item) => item._id === id);
+  // const drink = drinks.drinks.find(drink => drink.idDrink === id);
+  const cartItem = cart.find(item => item.id === id);
+  if (cartItem == undefined) return null;
   
   type cartValues = {
     id : string;
@@ -18,24 +20,24 @@ export function CartItem({ id, quantity }: cartItem) {
     price : number;
   }
   const values : cartValues = {
-    id: "",
-    title: "",
-    imageUrl: "",
-    price: 0
+    id: cartItem.id,
+    title: cartItem?.name,
+    imageUrl: cartItem?.imageUrl,
+    price: cartItem?.price
   };
-  if (item == null && drink != null){
-    values.id = drink.idDrink;
-    values.title = drink.strDrink;
-    values.imageUrl = drink.strDrinkThumb;
-    values.price = 49;
-  }
+  // if (item == null && drink != null){
+  //   values.id = drink.idDrink;
+  //   values.title = drink.strDrink;
+  //   values.imageUrl = drink.strDrinkThumb;
+  //   values.price = 49;
+  // }
   
-  if (item != null && drink == null){
-    values.id = item._id;
-    values.title = item.title;
-    values.imageUrl = item.imageUrl;
-    values.price = item.price;
-  }
+  // if (item != null && drink == null){
+  //   values.id = item._id;
+  //   values.title = item.title;
+  //   values.imageUrl = item.imageUrl;
+  //   values.price = item.price;
+  // }
   return (
     <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
       <img

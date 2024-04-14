@@ -1,11 +1,18 @@
 import { Button, Card } from "react-bootstrap";
-import { Menu, useCart } from "../contexts/CartContext";
+import { Menu, ShoppingCart, useCart } from "../contexts/CartContext";
 import { formatCurrency } from "../utilities/CurrencyFormatter";
 
 export function MenuItem(menu: Menu) {
   const { removeItem, increaseQuantity, decreaseQuantity, getQuantity } =
     useCart();
   const quantity = getQuantity(menu._id);
+  const cartItem : ShoppingCart = {
+    id :  menu?._id,
+    name : menu?.title,
+    imageUrl : menu?.imageUrl,
+    price : menu?.price,
+    quantity : quantity
+    }
   return (
     <Card className="h-100 mt-3 shadow-sm">
       <Card.Img
@@ -25,7 +32,7 @@ export function MenuItem(menu: Menu) {
             <Button
               variant="btn btn-dark"
               className="w-100"
-              onClick={() => increaseQuantity(menu._id)}
+              onClick={() => increaseQuantity(cartItem)}
             >
               + Lägg i varukorgen
             </Button>
@@ -36,22 +43,22 @@ export function MenuItem(menu: Menu) {
             >
               <div
                 style={{ width: "18rem", height: "2.5rem" }}
-                className="d-flex justify-content-between bg-dark text-white rounded"
+                className="d-flex text-white rounded"
               >
                 <Button
                   style={{ width: "2.5rem" }}
-                  variant="btn btn-dark"
+                  variant="btn btn-outline-dark" className="rounded-0 rounded-start"
                   onClick={() => decreaseQuantity(menu._id)}
                 >
                   <span className="fw-bold">-</span>
                 </Button>
-                <div>
+                <div className="bg-dark ps-3 pe-3">
                   <span className="fs-4">{quantity}</span> st. i varukorgen
                 </div>
                 <Button
                   style={{ width: "2.5rem" }}
-                  variant="btn btn-dark"
-                  onClick={() => increaseQuantity(menu._id)}
+                  variant="btn btn-outline-dark" className="rounded-0 rounded-end"
+                  onClick={() => increaseQuantity(cartItem)}
                 >
                   <span className="fw-bold">+</span>
                 </Button>
@@ -59,10 +66,10 @@ export function MenuItem(menu: Menu) {
 
               <Button
                 style={{ width: "6rem", height: "2.5rem" }}
-                variant="danger"
+                variant="outline-danger"
                 onClick={() => removeItem(menu._id)}
               >
-                Remove
+                Ta Bort
               </Button>
             </div>
           )}
