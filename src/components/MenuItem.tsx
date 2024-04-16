@@ -11,7 +11,8 @@ export function MenuItem(menu: Menu) {
     name : menu?.title,
     imageUrl : menu?.imageUrl,
     price : menu?.price,
-    quantity : quantity
+    quantity : quantity,
+    productType : "menu"
     }
   return (
     <Card className="h-100 mt-3 shadow-sm">

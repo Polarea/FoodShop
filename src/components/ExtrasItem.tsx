@@ -11,7 +11,8 @@ export function ExtrasItem(item: Ingredients) {
       name : item.name,
       imageUrl : item.unit,
       price : item.amount,
-      quantity : quantity
+      quantity : quantity,
+      productType : "extras"
       }
     return (
       <Card className="h-100 mt-3 shadow-sm">

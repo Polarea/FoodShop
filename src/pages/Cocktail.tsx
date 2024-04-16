@@ -25,7 +25,8 @@ export default function Cocktail() {
     name : selectedDrinks.drinks[index].strDrink,
     imageUrl : selectedDrinks.drinks[index].strDrinkThumb,
     price : 59,
-    quantity : quantity
+    quantity : quantity,
+    productType : "drink"
     }
 
   async function fetchDrinks(patchUrl : string){

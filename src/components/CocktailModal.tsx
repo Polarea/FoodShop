@@ -13,7 +13,8 @@ function CocktailModal() {
       name : drink?.strDrink,
       imageUrl : drink?.strDrinkThumb,
       price : 59,
-      quantity : quantity
+      quantity : quantity,
+      productType : "drink"
       }
   return (
     

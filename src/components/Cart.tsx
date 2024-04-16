@@ -2,23 +2,32 @@ import { Button, Offcanvas, Stack } from "react-bootstrap";
 import { formatCurrency } from "../utilities/CurrencyFormatter";
 import { useCart } from "../contexts/CartContext";
 import { CartItem } from "./CartItem";
+import { useState } from "react";
 
 export default function Cart() {
   const { open, isCartOpen, cart, menu, drinks } = useCart();
 
-  function drinksInCart(){
-    const drinksQuantity = cart.reduce((drinksTotal, cartItem) => {
-      const drink = drinks.drinks.find(_drink => _drink.idDrink === cartItem.id);
-      if (drink != null) { return drinksTotal + 1;} return drinksTotal;
-    } ,0); return drinksQuantity;
+  const [tips, setTips] = useState(0);
+
+  function drinkExistsInCart() {
+    if (cart.find(item => item.productType === "drink")){
+      return true
+    }
+    if (tips < 1){
+      setTips(1);
+      return false
+    }
+    return true
   }
+
   function orderButton(){
     open(false, 'cart', '');
-    if (drinksInCart() == 0){      
+    if (!drinkExistsInCart()){      
       open(true, 'cocktail', '');
     }
     else{
       open(true, 'confirmation', '');
+      setTips(0);
     }
   }
 
