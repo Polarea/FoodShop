@@ -5,9 +5,7 @@ export type CounterRef = {
   reset : () => void; 
 }
 
-interface CounterProps{}
-
-function Counter(props : CounterProps ,ref : Ref<CounterRef>) {
+function Counter(ref : Ref<CounterRef>) {
   const [counter, setCounter] = useState(0);
   const increment = () => setCounter(counter + 1);
   const decrement = () => setCounter(counter - 1);

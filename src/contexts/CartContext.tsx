@@ -73,7 +73,7 @@ export type ShoppingCart = {
   imageUrl : string;
   price : number;
   quantity: number;
-  productType : string;
+  productType? : string;
 };
 
 const CartContext = createContext({} as CartContext);
