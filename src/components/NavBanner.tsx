@@ -13,7 +13,7 @@ export function NavBanner() {
             <p id="title">Tap&Tini</p>
           </Row>
           <Row id="navrow">
-            <Nav style={{ width: "50%", display: "flex" }} className="me-auto">
+            <Nav>
               <Nav.Link id="link" to="/menu" as={NavLink}>
                 Meny
               </Nav.Link>
@@ -23,18 +23,18 @@ export function NavBanner() {
               <Nav.Link id="link" to="/extras" as={NavLink}>
                 Tillbehör
               </Nav.Link>
-            </Nav>
             {totalQuantity > 0 && (
               <Button
                 onClick={() => open(true, "cart", "")}
                 id="cartButton"
                 variant="outline-dark"
-                className="rounded-circle"
+                className="rounded-circle ms-auto"
               >
                 <BsCartFill id="cartImage" />
                 <div id="quantityIcon">{totalQuantity}</div>
               </Button>
             )}
+            </Nav>
           </Row>
         </Col>
       </Container>
