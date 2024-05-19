@@ -25,9 +25,10 @@ export default function Cart() {
     if (!drinkExistsInCart()){      
       open(true, 'cocktail', '');
     }
-    else{
-      open(true, 'confirmation', '');
+    else{     
       setTips(0);
+      open(true, 'processing', ''); 
+      open(true, 'confirmation', '');
     }
   }
 

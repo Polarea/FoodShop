@@ -16,6 +16,7 @@ Container, Column, Row{
 
 #title{
 border-radius: 0% 0% 15% 15%;
+text-shadow: 1px 1px 10px;
 color: whitesmoke;
 background-color: black;
 text-align: center;
@@ -38,6 +39,7 @@ font-size: 1.2rem;
 font-weight: 500;
 letter-spacing: 0.1rem;
 text-align: center;
+background-color: whitesmoke;
 }
 
 #link:hover{
@@ -73,6 +75,15 @@ width: 2rem;
     justify-content:center;
     align-items:center;
 }
-.translate-y-70{
-    transform: translateY(-70%);
-}
+
+.processing{
+    animation: pulse 0.7s infinite alternate;
+  }
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

@@ -54,6 +54,7 @@ type CartContext = {
   isCocktailOpen: boolean;
   isCartOpen: boolean;
   isExtrasOpen: boolean;
+  isProcessingOpen: boolean;
   open: (openClose: boolean, value: string, id: string) => void;
   totalQuantity: number;
   cart: ShoppingCart[];
@@ -110,6 +111,7 @@ export function CartProvider({ children }: ProviderValue) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCocktailOpen, setIsCockailOpen] = useState(false);
   const [isExtrasOpen, setIsExtrasOpen] = useState(false);
+  const [isProcessingOpen, setProcessingOpen] = useState(false);
   const [index, setIndex] = useState(0);
   const open = (openClose: boolean, value: string, id: string) => {
     switch (value) {
@@ -128,6 +130,10 @@ export function CartProvider({ children }: ProviderValue) {
         break;
         case 'confirmation':
           setIsConfirmationOpen(openClose);
+          break;
+          case 'processing':
+            setProcessingOpen(openClose);
+            break;
     }
   };
   const [cart, setCart] = useLocalStorage<ShoppingCart[]>("cart", []);
@@ -207,6 +213,7 @@ export function CartProvider({ children }: ProviderValue) {
         isMenuOpen,
         isCocktailOpen,
         isExtrasOpen,
+        isProcessingOpen,
         open,
         getQuantity,
         increaseQuantity,

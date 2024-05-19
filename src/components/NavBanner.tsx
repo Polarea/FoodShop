@@ -10,12 +10,12 @@ export function NavBanner() {
       <Container>
         <Col>
           <Row>
-            <p id="title">Food Shop</p>
+            <a  className="text-decoration-none" href="/"><p id="title">Food Shop</p></a>
           </Row>
           <Row id="navrow">
             <Col>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav" className="bg-white w-75">
+            <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
               <Nav.Link id="link" to="/menu" as={NavLink}>
                 Meny
