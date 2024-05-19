@@ -15,7 +15,7 @@ export function NavBanner() {
           <Row id="navrow">
             <Col>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Collapse id="basic-navbar-nav" className="bg-white w-75">
             <Nav>
               <Nav.Link id="link" to="/menu" as={NavLink}>
                 Meny
