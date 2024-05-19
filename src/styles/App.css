@@ -73,4 +73,6 @@ width: 2rem;
     justify-content:center;
     align-items:center;
 }
-
+.translate-y-70{
+    transform: translateY(-70%);
+}

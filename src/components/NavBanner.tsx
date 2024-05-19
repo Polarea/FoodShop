@@ -10,7 +10,7 @@ export function NavBanner() {
       <Container>
         <Col>
           <Row>
-            <p id="title">Tap&Tini</p>
+            <p id="title" className="w-100">Tap&Tini</p>
           </Row>
           <Row id="navrow">
             <Nav>

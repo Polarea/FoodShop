@@ -19,11 +19,13 @@ function CocktailModal() {
   return (
     
     <Modal show={isCocktailOpen} onHide={()=>open(false, "cocktail", '')}>
-        <div className="text-muted fs-5 mt-2 text-center">Vill du lägga till</div> <div style={{fontSize:'2rem', textAlign:'center',
+        <button className="ms-auto me-1 mt-1 border border-outline-none" onClick={()=>open(false, "cocktail", '')}>✖️</button>
+        <div className="text-muted fs-5 text-center translate-y-70">Vill du lägga till</div> 
+        <div style={{fontSize:'2rem', textAlign:'center',
                 letterSpacing: "0.5rem",
                 textShadow: "1px 1px 10px",
               }}>{drink?.strDrink}</div>
-    <Card key={drink?.idDrink} className="mt-3">
+    <Card key={drink?.idDrink}>
       <Card.Body>
         <Col className="w-100 h-100">
           <Row className="w-100 h-75">
@@ -38,7 +40,7 @@ function CocktailModal() {
               </div>
               </Row>
           <Row className="w-100 h-25">
-            <div className="m-3 fs-5 fw-bold">{formatCurrency(59)}</div>
+            <div className="m-1 fs-5 fw-bold">{formatCurrency(59)}</div>
             <div className="mt-auto mb-3">
               
               {quantity === 0 ? (

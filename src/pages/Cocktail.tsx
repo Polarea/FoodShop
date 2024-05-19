@@ -73,7 +73,7 @@ export default function Cocktail() {
               style={{
                 letterSpacing: "0.5rem",
                 textShadow: "1px 1px 10px",
-                height: "5rem"
+                height: "3rem"
               }}
             >
               {selectedDrinks.drinks[index].strDrink}
