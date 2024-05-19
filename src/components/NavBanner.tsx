@@ -6,13 +6,16 @@ import { BsCartFill } from "react-icons/bs";
 export function NavBanner() {
   const { open, totalQuantity } = useCart();
   return (
-    <Navbar id="navbar" sticky="top">
+    <Navbar id="navbar" sticky="top" expand="lg">
       <Container>
         <Col>
           <Row>
-            <p id="title" className="w-100">Tap&Tini</p>
+            <p id="title">Food Shop</p>
           </Row>
           <Row id="navrow">
+            <Col>
+            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+            <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
               <Nav.Link id="link" to="/menu" as={NavLink}>
                 Meny
@@ -23,6 +26,10 @@ export function NavBanner() {
               <Nav.Link id="link" to="/extras" as={NavLink}>
                 Tillbehör
               </Nav.Link>
+            </Nav>
+            </Navbar.Collapse>
+            </Col>
+            <Col>
             {totalQuantity > 0 && (
               <Button
                 onClick={() => open(true, "cart", "")}
@@ -34,7 +41,7 @@ export function NavBanner() {
                 <div id="quantityIcon">{totalQuantity}</div>
               </Button>
             )}
-            </Nav>
+            </Col>
           </Row>
         </Col>
       </Container>

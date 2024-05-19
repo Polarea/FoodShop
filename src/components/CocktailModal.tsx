@@ -19,7 +19,7 @@ function CocktailModal() {
   return (
     
     <Modal show={isCocktailOpen} onHide={()=>open(false, "cocktail", '')}>
-        <button className="ms-auto me-1 mt-1 border border-outline-none" onClick={()=>open(false, "cocktail", '')}>✖️</button>
+        <button type="button" className="btn-close ms-auto" style={{height:"2rem", width:"2rem"}} onClick={()=>open(false, "cocktail", '')}></button>
         <div className="text-muted fs-5 text-center translate-y-70">Vill du lägga till</div> 
         <div style={{fontSize:'2rem', textAlign:'center',
                 letterSpacing: "0.5rem",

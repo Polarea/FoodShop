@@ -15,13 +15,13 @@ Container, Column, Row{
 }
 
 #title{
-border-radius: 15%;
+border-radius: 0% 0% 15% 15%;
 color: whitesmoke;
 background-color: black;
 text-align: center;
 width: 100%;
-font-size: 4rem;
-letter-spacing: 2rem;
+font-size: 3rem;
+letter-spacing: 1rem;
 }
 
 #navrow{
