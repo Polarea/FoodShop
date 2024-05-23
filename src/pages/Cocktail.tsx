@@ -100,7 +100,7 @@ export default function Cocktail() {
                     >
                       <Button
                         style={{ width: "2.5rem" }}
-                        variant="btn btn-dark"
+                        variant="btn btn-outline-dark bg-white rounded-0 rounded-start"
                         onClick={() => decreaseQuantity(selectedDrinks.drinks[index].idDrink)}
                       >
                         <span className="fw-bold">-</span>
@@ -110,7 +110,7 @@ export default function Cocktail() {
                       </div>
                       <Button
                         style={{ width: "2.5rem" }}
-                        variant="btn btn-dark"
+                        variant="btn btn-outline-dark bg-white rounded-0 rounded-end"
                         onClick={() => increaseQuantity(cartItem)}
                       >
                         <span className="fw-bold">+</span>
