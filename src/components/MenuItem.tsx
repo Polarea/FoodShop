@@ -53,7 +53,7 @@ export function MenuItem(menu: Menu) {
                 >
                   <span className="fw-bold">-</span>
                 </Button>
-                <div className="bg-dark ps-3 pe-3">
+                <div className="bg-dark ps-2 pe-2">
                   <span className="fs-4">{quantity}</span> st. i varukorgen
                 </div>
                 <Button
