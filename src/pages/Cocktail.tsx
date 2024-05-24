@@ -69,11 +69,11 @@ export default function Cocktail() {
             <Button type="button" className="border btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?a=Non_Alcoholic")}>Alkoholfri</Button>
             <Button type="button" className="rounded-0 rounded-end border btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?c=Coffee_/_Tea")}>Kaffe / Te</Button>
             </div>
-            <Card.Title className="mt-1 text-center fs-3"
+            <Card.Title className="mt-1 text-center fs-4"
               style={{
                 letterSpacing: "0.5rem",
                 textShadow: "1px 1px 10px",
-                height: "2.1rem",
+                height: "3.5rem",
                 overflow: "hidden"
               }}
             >
