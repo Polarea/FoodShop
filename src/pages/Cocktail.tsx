@@ -73,7 +73,7 @@ export default function Cocktail() {
               style={{
                 letterSpacing: "0.5rem",
                 textShadow: "1px 1px 10px",
-                height: "3rem",
+                height: "2rem",
                 overflow: "hidden"
               }}
             >
