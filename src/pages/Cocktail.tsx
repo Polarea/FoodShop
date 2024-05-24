@@ -69,11 +69,12 @@ export default function Cocktail() {
             <Button type="button" className="border btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?a=Non_Alcoholic")}>Alkoholfri</Button>
             <Button type="button" className="rounded-0 rounded-end border btn btn-light btn-outline-dark fw-bold" onClick={()=>fetchDrinks("?c=Coffee_/_Tea")}>Kaffe / Te</Button>
             </div>
-            <Card.Title className="mt-4 text-center fs-2"
+            <Card.Title className="mt-1 text-center fs-2"
               style={{
                 letterSpacing: "0.5rem",
                 textShadow: "1px 1px 10px",
-                height: "3rem"
+                height: "3rem",
+                overflow: "hidden"
               }}
             >
               {selectedDrinks.drinks[index].strDrink}
@@ -95,11 +96,11 @@ export default function Cocktail() {
                     style={{ gap: "0.5rem" }}
                   >
                     <div
-                      style={{ width: "18rem", height: "2.5rem" }}
+                      style={{ width: "14rem", height: "2.5rem" }}
                       className="d-flex justify-content-between bg-dark text-white rounded"
                     >
                       <Button
-                        style={{ width: "2.5rem" }}
+                        style={{ width: "2rem" }}
                         variant="btn btn-outline-dark bg-white rounded-0 rounded-start"
                         onClick={() => decreaseQuantity(selectedDrinks.drinks[index].idDrink)}
                       >
@@ -109,7 +110,7 @@ export default function Cocktail() {
                         <span className="fs-4">{quantity}</span> st. i varukorgen
                       </div>
                       <Button
-                        style={{ width: "2.5rem" }}
+                        style={{ width: "2rem" }}
                         variant="btn btn-outline-dark bg-white rounded-0 rounded-end"
                         onClick={() => increaseQuantity(cartItem)}
                       >
