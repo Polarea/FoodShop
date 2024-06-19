@@ -17,7 +17,7 @@ function Confirmation() {
       {isProcessingOpen ? 
       <>
       {Processing()}
-      <div className="processing mx-auto mb-2 fs-3 fw-bold">Order is being processed...</div>
+      <div className="processing mx-auto mb-2 fs-3 fw-bold">Beställningen bearbetas...</div>
       <div className="spinner-border mx-auto mb-2" role="status"></div>
       </> : 
       <>
