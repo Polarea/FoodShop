@@ -14,8 +14,9 @@ export default function Cocktail() {
     decreaseQuantity,
     getQuantity,
   } = useCart();
-  
-  const [index, setIndex] = useState(10);
+
+  const drinkIndex = Math.floor(Math.random() * 20 - 1) + 1;
+  const [index, setIndex] = useState(drinkIndex);
   const [selectedDrinks, setSelectedDrinks] = useState(drinks);
   const handelSelect = (selectedIndex : number) => {setIndex(selectedIndex); }
   const quantity = getQuantity(selectedDrinks.drinks[index].idDrink);
