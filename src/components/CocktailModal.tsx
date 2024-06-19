@@ -5,9 +5,8 @@ import { formatCurrency } from "../utilities/CurrencyFormatter";
 
 
 function CocktailModal() {
-    const {drinks, open, isCocktailOpen, getQuantity, increaseQuantity, decreaseQuantity, removeItem} = useCart(); 
-    const drinkIndex = Math.floor(Math.random() * 20 - 1) + 1;
-    const drink = drinks.drinks[drinkIndex]; 
+    const {drinks, open, isCocktailOpen, getQuantity, increaseQuantity, decreaseQuantity, removeItem} = useCart();
+    const drink = drinks.drinks[1]; 
     const quantity = getQuantity(drink?.idDrink);
     const cartItem : ShoppingCart = {
       id :  drink?.idDrink,
