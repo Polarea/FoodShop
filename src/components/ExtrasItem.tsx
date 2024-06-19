@@ -1,16 +1,16 @@
 import { Button, Card } from "react-bootstrap";
-import { Ingredients, ShoppingCart, useCart } from "../contexts/CartContext";
+import { Meal, ShoppingCart, useCart } from "../contexts/CartContext";
 import { formatCurrency } from "../utilities/CurrencyFormatter";
 
-export function ExtrasItem(item: Ingredients) {
+export function ExtrasItem(item: Meal) {
     const { removeItem, increaseQuantity, decreaseQuantity, getQuantity } =
       useCart();
-    const quantity = getQuantity(item._id);
+    const quantity = getQuantity(item.idMeal);
     const cartItem : ShoppingCart = {
-      id :  item._id,
-      name : item.name,
-      imageUrl : item.unit,
-      price : item.amount,
+      id :  item.idMeal,
+      name : item.strMeal,
+      imageUrl : item.strMealThumb,
+      price : 99,
       quantity : quantity,
       productType : "extras"
       }

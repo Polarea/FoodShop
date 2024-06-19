@@ -17,11 +17,11 @@ export default function MenuModal() {
 
   // const itemIndex = useRef(index);
   const [item, setItem] = useState(menu[index + 1]);
-  const quantity = getQuantity(item._id);
+  const quantity = getQuantity(item.idMeal);
   const cartItem : ShoppingCart = {
-    id :  item._id,
-    name : item.title,
-    imageUrl : item.imageUrl,
+    id :  item.idMeal,
+    name : item.strMeal,
+    imageUrl : item.strMealThumb,
     price : 59,
     quantity : quantity
     }
@@ -41,17 +41,16 @@ export default function MenuModal() {
   return (
     <Modal show={isMenuOpen} onHide={() => open(false, "menu", "")}>
       <Modal.Header closeButton>
-        <Modal.Title className="fs-4">{item.title}</Modal.Title>
+        <Modal.Title className="fs-4">{item.strMeal}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Card key={item._id} style={{ textAlign: "center" }}>
+        <Card key={item.idMeal} style={{ textAlign: "center" }}>
           <Card.Body>
             <Card.Img
-              src={item.imageUrl}
+              src={item.strMealThumb}
               height="400rem"
               style={{ objectFit: "contain" }}
             />
-            <Card.Text>{item.description}</Card.Text>
             <div className="mt-auto">
               {quantity === 0 ? (
                 <Button
@@ -73,7 +72,7 @@ export default function MenuModal() {
                     <Button
                       style={{ width: "2.5rem" }}
                       variant="btn btn-dark"
-                      onClick={() => decreaseQuantity(item._id)}
+                      onClick={() => decreaseQuantity(item.idMeal)}
                     >
                       <span className="fw-bold">-</span>
                     </Button>
@@ -92,7 +91,7 @@ export default function MenuModal() {
                   <Button
                     style={{ width: "6rem", height: "2.5rem" }}
                     variant="danger"
-                    onClick={() => removeItem(item._id)}
+                    onClick={() => removeItem(item.idMeal)}
                   >
                     Remove
                   </Button>

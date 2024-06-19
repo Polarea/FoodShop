@@ -12,27 +12,22 @@ import Cocktail from "../pages/Cocktail";
 import Confirmation from "../components/Confirmation";
 import CocktailModal from "../components/CocktailModal";
 // import MenuModal from "../components/MenuModal";
-const MENU_URL = "https://iths-2024-recept-grupp7-86oop6.reky.se/recipes";
+const MENU_URL = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
 
-const COCKTAIL_URL =
-  "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail";
+const COCKTAIL_URL =  "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail";
 
-export interface Ingredients{
-  _id : string;
-  name : string;
-  amount : number;
-  unit : string;
+  const SIDES_URL =  "https://www.themealdb.com/api/json/v1/1/filter.php?c=Side";
+
+export interface Meal {
+  idMeal: string;
+  strMealThumb: string;
+  strMeal: string;
 }
-  
+
 export interface Menu {
-  _id: string;
-  imageUrl: string;
-  title: string;
-  description: string;
-  ingredients: Ingredients[];
-  price: number;
-  quantity: number;
+  meals : Meal[];
 }
+
 export interface Cocktail {
   strDrink: string;
   strDrinkThumb: string;
@@ -44,11 +39,11 @@ export interface Cocktails {
   drinks: Cocktail[];
 }
 type CartContext = {
-  ingredients : Ingredients[];
+  sides : Meal[];
   clearCart : ()=> void;
   index: number;
   drinks: Cocktails;
-  menu: Menu[];
+  menu: Meal[];
   isConfirmationOpen : boolean;
   isMenuOpen: boolean;
   isCocktailOpen: boolean;
@@ -84,16 +79,17 @@ export function useCart() {
 }
 
 export function CartProvider({ children }: ProviderValue) {
-  const [menu, setMenu] = useState<Menu[]>([]);
+
+  const [menu, setMenu] = useState<Meal[]>([]);
   const fetchMenu = async () => {
     const response = await fetch(`${MENU_URL}`);
-    const menus = (await response.json()) as Menu[];
-    setMenu(menus);
+    const menus = (await response.json()) as Menu;
+    setMenu(menus.meals);
   };
   useEffect(() => {
     fetchMenu();
   }, []);
-  const ingredients = menu[0]?.ingredients as Ingredients[]; 
+
   const cocktails: Cocktails = {
     drinks: [],
   };
@@ -106,6 +102,17 @@ export function CartProvider({ children }: ProviderValue) {
   useEffect(() => {
     fetchDrinks();
   }, []);
+
+  const [sides, setSides] = useState<Meal[]>([]);
+  const fetchSides = async () => {
+    const response = await fetch(`${SIDES_URL}`);
+    const _sides = (await response.json()) as Menu;
+    setSides(_sides.meals);
+  };
+  useEffect(() => {
+    fetchSides();
+  }, []);
+
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -150,7 +157,7 @@ export function CartProvider({ children }: ProviderValue) {
   function getIndex(id: string) {
     let itemIndex = 0;
     menu.map((item) => {
-      if (item._id === id) {
+      if (item.idMeal === id) {
         itemIndex = menu.indexOf(item);
       }
     });
@@ -201,7 +208,7 @@ export function CartProvider({ children }: ProviderValue) {
   return (
     <CartContext.Provider
       value={{
-        ingredients,
+        sides,
         clearCart,
         index,
         menu,

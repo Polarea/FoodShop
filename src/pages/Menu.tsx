@@ -9,7 +9,7 @@ export default function Menu() {
     <>
       <Row className="g-3 mb-5" xs={1} md={2} lg={3}>
         {menu?.map((item) => (
-          <Col key={item._id}>
+          <Col key={item.idMeal}>
             <MenuItem {...item} />
           </Col>
         ))}

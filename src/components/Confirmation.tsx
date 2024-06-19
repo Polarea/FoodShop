@@ -4,7 +4,7 @@ import { useCart } from "../contexts/CartContext";
 import { ConfirmationItem } from "./ConfirmationItem";
 
 function Confirmation() {
-    const {open, isConfirmationOpen, isProcessingOpen, cart, clearCart, menu, drinks } = useCart();
+    const {open, isConfirmationOpen, isProcessingOpen, cart, clearCart } = useCart();
 
     function Processing(){
       setTimeout(() => {
@@ -32,9 +32,7 @@ function Confirmation() {
     <div className="ms-auto fw-bold fs-5">
       {`Total ${formatCurrency(
         cart.reduce((total, cartItem) => {
-          const _menu = menu.find((i) => i._id === cartItem.id);
-           const item = _menu ? _menu : drinks.drinks.find(drink => drink.idDrink === cartItem.id);
-          return total + ((item?.price || 49) * cartItem.quantity);
+          return total + ((cartItem.price || 49) * cartItem.quantity);
         }, 0) 
       )}`}
     </div>

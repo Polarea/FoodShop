@@ -1,16 +1,16 @@
 import { Button, Card } from "react-bootstrap";
-import { Menu, ShoppingCart, useCart } from "../contexts/CartContext";
+import { Meal, ShoppingCart, useCart } from "../contexts/CartContext";
 import { formatCurrency } from "../utilities/CurrencyFormatter";
 
-export function MenuItem(menu: Menu) {
+export function MenuItem(menu: Meal) {
   const { removeItem, increaseQuantity, decreaseQuantity, getQuantity } =
     useCart();
-  const quantity = getQuantity(menu._id);
+  const quantity = getQuantity(menu.idMeal);
   const cartItem : ShoppingCart = {
-    id :  menu?._id,
-    name : menu?.title,
-    imageUrl : menu?.imageUrl,
-    price : menu?.price,
+    id :  menu?.idMeal,
+    name : menu?.strMeal,
+    imageUrl : menu?.strMealThumb,
+    price : 299,
     quantity : quantity,
     productType : "menu"
     }
@@ -18,16 +18,15 @@ export function MenuItem(menu: Menu) {
     <Card className="h-100 mt-3 shadow-sm">
       <Card.Img
         variant="top"
-        src={menu.imageUrl}
+        src={menu.strMealThumb}
         height="200rem"
         style={{ objectFit: "cover" }}
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex justify-content-between align-items-baseline">
-          <span className="fs-4">{menu.title}</span>{" "}
-          <span className="ms-2 text-muted">{formatCurrency(menu.price)}</span>
+          <span className="fs-4">{menu.strMeal}</span>{" "}
+          <span className="ms-2 text-muted">{formatCurrency(cartItem.price)}</span>
         </Card.Title>
-        <div className="mb-3 fs-5">{menu.description}</div>
         <div className="mt-auto">
           {quantity === 0 ? (
             <Button
@@ -49,7 +48,7 @@ export function MenuItem(menu: Menu) {
                 <Button
                   style={{ width: "2.5rem" }}
                   variant="btn btn-outline-dark" className="rounded-0 rounded-start"
-                  onClick={() => decreaseQuantity(menu._id)}
+                  onClick={() => decreaseQuantity(menu.idMeal)}
                 >
                   <span className="fw-bold">-</span>
                 </Button>
@@ -68,7 +67,7 @@ export function MenuItem(menu: Menu) {
               <Button
                 style={{ width: "6rem", height: "2.5rem" }}
                 variant="outline-danger"
-                onClick={() => removeItem(menu._id)}
+                onClick={() => removeItem(menu.idMeal)}
               >
                 Ta Bort
               </Button>

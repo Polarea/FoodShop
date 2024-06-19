@@ -5,7 +5,7 @@ import { CartItem } from "./CartItem";
 import { useState } from "react";
 
 export default function Cart() {
-  const { open, isCartOpen, cart, menu, drinks } = useCart();
+  const { open, isCartOpen, cart } = useCart();
 
   const [tips, setTips] = useState(0);
 
@@ -49,9 +49,7 @@ export default function Cart() {
           <div className="ms-auto fw-bold fs-5">
             {`Total ${formatCurrency(
               cart.reduce((total, cartItem) => {
-                const _menu = menu.find((i) => i._id === cartItem.id);
-                 const item = _menu ? _menu : drinks.drinks.find(drink => drink.idDrink === cartItem.id);
-                return total + ((item?.price || 49) * cartItem.quantity);
+                return total + ((cartItem.price || 49) * cartItem.quantity);
               }, 0) 
             )}`}
           </div>
